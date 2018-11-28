@@ -11,15 +11,9 @@ module.exports = {
         exclude: /node_modules/,
         use: ['babel-loader']
       },
+      //Clever way to combine css and less pre processor
       {
-        test: /\.css$/,
-        use: [
-          MiniCssExtractPlugin.loader,
-          "css-loader",
-        ]
-      },
-      {
-        test: /\.less$/,
+        test: /\.(c|le)ss$/,
         use:[
           process.env.NODE_ENV == 'production' ?  'style-loader' : MiniCssExtractPlugin.loader ,  //CHECK NODE ENV
           "css-loader",
