@@ -1,10 +1,9 @@
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
-  entry: './src/index.js',
+  entry: './src/js/index.js',
   module: {
     rules: [
       {
@@ -13,9 +12,16 @@ module.exports = {
         use: ['babel-loader']
       },
       {
+        test: /\.css$/,
+        use: [
+          MiniCssExtractPlugin.loader,
+          "css-loader",
+        ]
+      },
+      {
         test: /\.less$/,
         use:[
-          process.env.NODE_ENV !== 'production' ? 'style-loader' : MiniCssExtractPlugin.loader,
+          process.env.NODE_ENV == 'production' ?  'style-loader' : MiniCssExtractPlugin.loader ,  //CHECK NODE ENV
           "css-loader",
           "less-loader"
         ]
@@ -37,8 +43,8 @@ module.exports = {
     new webpack.HotModuleReplacementPlugin(),
     new MiniCssExtractPlugin(
       {
-        filename: '[name].[hash].css',
-        chunkFilename: '[id].[hash].css'
+        filename: './css/[name].[hash].css',
+        chunkFilename:  './css/[id].[hash].css'
       }
     )
   ],
