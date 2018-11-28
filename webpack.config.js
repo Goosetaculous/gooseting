@@ -1,4 +1,6 @@
 const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
@@ -29,6 +31,9 @@ module.exports = {
     filename: 'bundle.js'
   },
   plugins: [
+    new HtmlWebpackPlugin({
+      template:'./src/index.html'
+    }),
     new webpack.HotModuleReplacementPlugin(),
     new MiniCssExtractPlugin(
       {
